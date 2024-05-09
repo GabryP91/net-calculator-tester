@@ -27,10 +27,14 @@ namespace TestCalc
 
         [Test]
         [TestCase(2,2)]
+        [TestCase(0, 0)]
+        [TestCase(2, "")]
         public void TestDivide( float num1, float num2)
         {
             float result = calculator.Divide(num1, num2);
             Assert.AreEqual(2, result);
+
+            Console.WriteLine($"Division Test: {num1} / {num2} = {result}");
         }
 
         [Test]
