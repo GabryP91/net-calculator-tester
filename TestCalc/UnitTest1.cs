@@ -12,10 +12,13 @@ namespace TestCalc
         }
 
         [Test]
-        public void TestAdd()
+        [TestCase(0,0,0)]
+        [TestCase(4.4567f, 2.567198f, 7)]
+        public void TestAdd(float num1, float num2, float result)
         {
-            float result = calculator.Add(5, 3);
-            Assert.AreEqual(8, result);
+            float add = calculator.Add(5, 3);
+
+            Assert.AreEqual(add, result);
         }
 
         [Test]
