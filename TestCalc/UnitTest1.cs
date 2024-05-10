@@ -28,13 +28,30 @@ namespace TestCalc
         [Test]
         [TestCase(2,2)]
         [TestCase(0, 0)]
-        [TestCase(2, "")]
         public void TestDivide( float num1, float num2)
         {
-            float result = calculator.Divide(num1, num2);
-            Assert.AreEqual(2, result);
+            try
+            {
+                float result = calculator.Divide(num1, num2);
 
-            Console.WriteLine($"Division Test: {num1} / {num2} = {result}");
+                // Mi assicuro che il denominatore non sia zero per evitare divisione per zero
+                if (num2 != 0)
+                {
+                    Assert.AreEqual(2, result);
+                    Console.WriteLine($"Division Test: {num1} / {num2} = {result}");
+                }
+                else
+                {
+                    // Se il denominatore è zero, ci aspettiamo un'eccezione
+                    Assert.Fail("La divisione per zero non dovrebbe essere permessa.");
+                }
+            }
+            catch (DivideByZeroException ex)
+            {
+                // Se la divisione per zero viene tentata, il test passa in caso di eccezione
+                Assert.IsTrue(num2 == 0, "La divisione per zero dovrebbe generare un'eccezione.");
+                Console.WriteLine($"Errore durante la divisione: {ex.Message}");
+            }
         }
 
         [Test]
